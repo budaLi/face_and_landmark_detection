@@ -22,3 +22,7 @@
 ### PS
 
     受hdface 人脸检测器影响 视频流比较卡顿 关键点定位还是比较准确的
+
+### demo  pic
+
+![Image text](https://github.com/budaLi/face_and_landmark_detection/blob/master/image.png)
