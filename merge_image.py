@@ -37,3 +37,4 @@ def picvideo(path, size):
 # 图片大小 640*480
 picvideo(r'./image', (640, 480))
 
+print("end")

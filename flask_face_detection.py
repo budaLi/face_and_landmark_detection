@@ -66,7 +66,7 @@ def main():
     plfd_backbone = PFLDInference()
 
     # 加载模型
-    checkpoint = torch.load("checkpoint_epoch_120.pth",map_location='cpu')
+    checkpoint = torch.load("landmark.pth",map_location='cpu')
     plfd_backbone.load_state_dict(checkpoint)
     plfd_backbone.eval()
     plfd_backbone = plfd_backbone
@@ -74,7 +74,7 @@ def main():
 
     # 读取摄像头图片
     # 多个摄像头 索引
-    capture = cv2.VideoCapture(0)
+    capture = cv2.VideoCapture(0+cv2.CAP_DSHOW)
 
     print("摄像头加载完成")
     for i in range(1000):
