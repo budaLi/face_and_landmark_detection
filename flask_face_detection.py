@@ -2,7 +2,6 @@
 # @Author  : Libuda
 # @FileName: flask_face_detection.py
 # @Software: PyCharm
-import os
 from hdface.hdface import hdface_detector
 import cv2
 from torchvision import transforms
@@ -41,9 +40,9 @@ def op_vedio():
         # 镜像调换 上下 1 为正
         image = cv2.flip(image, 1)
 
-        face_boxs = detect_face(image)
-
-        print(face_boxs)
+        # face_boxs = detect_face(image)
+        #
+        # print(face_boxs)
 
         cv2.imshow("video", image)
 
@@ -145,7 +144,7 @@ def main():
         for (x, y) in pre_landmark.astype(np.int32):
             cv2.circle(image, (x1 - left + x, y1 - bottom + y), 1, (255, 255, 0), 1)
 
-
+        cv2.imwrite("./image/test_{}.jpg".format(i),image)
         cv2.imshow("video", image)
 
         c = cv2.waitKey(10)
