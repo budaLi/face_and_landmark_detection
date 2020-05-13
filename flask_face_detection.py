@@ -4,8 +4,11 @@
 # @Software: PyCharm
 from hdface.hdface import hdface_detector
 import cv2
+import os
+import shutil
 from torchvision import transforms
-from pfld import PFLDInference
+# from pfld import PFLDInference
+from pfld_simple import PFLDInference
 import torch
 import numpy as np
 
@@ -66,7 +69,7 @@ def main():
     plfd_backbone = PFLDInference()
 
     # 加载模型
-    checkpoint = torch.load("landmark.pth",map_location='cpu')
+    checkpoint = torch.load("checkpoint_epoch_120.pth",map_location='cpu')
     plfd_backbone.load_state_dict(checkpoint)
     plfd_backbone.eval()
     plfd_backbone = plfd_backbone
@@ -75,8 +78,13 @@ def main():
     # 读取摄像头图片
     # 多个摄像头 索引
     capture = cv2.VideoCapture(0+cv2.CAP_DSHOW)
-
+    image_path = "./image"
+    if os.path.isfile(image_path) and len(os.listdir(image_path))>0:
+        shutil.rmtree(image_path)
     print("摄像头加载完成")
+
+    if not os.path.exists(image_path):
+        os.mkdir(image_path)
     for i in range(1000):
         # frame 图片的每一帧
         ret, image = capture.read()
@@ -146,6 +154,10 @@ def main():
 
         cv2.imwrite("./image/test_{}.jpg".format(i),image)
         cv2.imshow("video", image)
+
+        # 进行操作进行下一帧
+        if cv2.waitKey():
+            continue
 
         c = cv2.waitKey(10)
         # esc退出
